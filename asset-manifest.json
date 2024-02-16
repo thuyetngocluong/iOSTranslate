@@ -1,16 +1,16 @@
 {
   "files": {
     "main.css": "/iOSTranslate/static/css/main.90249438.css",
-    "main.js": "/iOSTranslate/static/js/main.a29def01.js",
+    "main.js": "/iOSTranslate/static/js/main.4f463197.js",
     "static/js/453.f31c2750.chunk.js": "/iOSTranslate/static/js/453.f31c2750.chunk.js",
     "static/media/logo.svg": "/iOSTranslate/static/media/logo.6ce24c58023cc2f8fd88fe9d219db6c6.svg",
     "index.html": "/iOSTranslate/index.html",
     "main.90249438.css.map": "/iOSTranslate/static/css/main.90249438.css.map",
-    "main.a29def01.js.map": "/iOSTranslate/static/js/main.a29def01.js.map",
+    "main.4f463197.js.map": "/iOSTranslate/static/js/main.4f463197.js.map",
     "453.f31c2750.chunk.js.map": "/iOSTranslate/static/js/453.f31c2750.chunk.js.map"
   },
   "entrypoints": [
     "static/css/main.90249438.css",
-    "static/js/main.a29def01.js"
+    "static/js/main.4f463197.js"
   ]
 }
