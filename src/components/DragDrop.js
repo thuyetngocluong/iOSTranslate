@@ -89,7 +89,7 @@ function DragDrop() {
         results["strings"][key]["localizations"][file[translatedKey][2].value] = {
           "stringUnit": {
             "state":"translated",
-            "value": file[translatedKey][idx].value
+            "value": JSON.stringify(file[translatedKey][idx].value).replace(/^"|"$/g, '')
           }
         }
       }
@@ -136,7 +136,7 @@ function DragDrop() {
           k = file["A"][idx].value
         }
 
-        data.push(`"${k}"="${file[key][idx].value}";`)
+        data.push(`"${k}"=${JSON.stringify(file[key][idx].value)};`)
       }
 
       folder.file("Localizable.strings", data.join("\n"))
