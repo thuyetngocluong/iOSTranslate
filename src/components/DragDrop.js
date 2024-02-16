@@ -58,19 +58,26 @@ function DragDrop() {
 
   const convertToCatalog = () => {
 
-
     let results = {
       "sourceLanguage": "en",
       "strings": {},
       "version": "1.0"
     }
 
-    const keys = Object.keys(file)
+    const copyFile = JSON.parse(JSON.stringify(file))
+    delete copyFile["B"]
+    const keys = Object.keys(copyFile)
+
+    console.log(keys)
+
     const length = file["A"].length
 
 
     for (let idx = 3; idx < length; idx++) {
-      let key = file["A"][idx].value
+      let key = file["B"][idx].value
+      if (!key || key.length === 0) {
+        key = file["A"][idx].value
+      }
       if (!results["strings"][key]) {
         results["strings"][key] = {
           "extractionState" : "manual",
@@ -144,14 +151,12 @@ function DragDrop() {
     });
   }
 
-
-
-
+  
   return (
     <div className="App">
       <FileUploader handleChange={handleChange} name="file" multiply={false} types={fileTypes}/>
-      <button className="Button" onClick={convertToCatalog}>String Catalog</button>
-      <button className="Button" onClick={convertToZip}>Zip File</button>
+      <button className="Button" onClick={convertToCatalog} disabled={file == null}>String Catalog</button>
+      <button className="Button" onClick={convertToZip} disabled={file == null}>Zip File</button>
     </div>
   );
 }
