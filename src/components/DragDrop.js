@@ -118,7 +118,10 @@ function DragDrop() {
 
     console.log(file)
 
-    const keys = Object.keys(file)
+    const copyFile = JSON.parse(JSON.stringify(file))
+    delete copyFile["B"]
+    const keys = Object.keys(copyFile)
+
     const length = file["A"].length
 
     let zip = new JSZip()
@@ -128,7 +131,12 @@ function DragDrop() {
       let folder = zip.folder(`${file[key][2].value}.lproj`)
       let data = []
       for (let idx = 3; idx < length; idx++) {
-        data.push(`"${file["A"][idx].value}"="${file[key][idx].value}";`)
+        let k = file["B"][idx].value
+        if (!k || k.length === 0) {
+          k = file["A"][idx].value
+        }
+
+        data.push(`"${k}"="${file[key][idx].value}";`)
       }
 
       folder.file("Localizable.strings", data.join("\n"))
@@ -151,7 +159,7 @@ function DragDrop() {
     });
   }
 
-  
+
   return (
     <div className="App">
       <FileUploader handleChange={handleChange} name="file" multiply={false} types={fileTypes}/>
