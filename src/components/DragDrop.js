@@ -159,12 +159,66 @@ function DragDrop() {
     });
   }
 
+  const convertRemoteConfigLocalization = () => {
+
+    let results = {
+      "items": {},
+    }
+
+    const copyFile = JSON.parse(JSON.stringify(file))
+    delete copyFile["B"]
+    const keys = Object.keys(copyFile)
+
+    const length = file["A"].length
+
+
+    for (let i = 0; i < keys.length; i++) {
+      let key = keys[i]
+      let languageCode = file[key][2].value
+      let data = []
+      for (let idx = 3; idx < length; idx++) {
+        let k = file["B"][idx].value
+        if (!k || k.length === 0) {
+          k = file["A"][idx].value
+        }
+
+        data.push({
+          key: k,
+          value: file[key][idx].value,
+          caseSensitive: false
+        })
+      }
+
+      results["items"][languageCode] = data
+    }
+
+
+
+    const data = JSON.stringify(results);
+    const blob = new Blob([data], { type: 'application/json' });
+
+    // Create a URL for the blob
+    const url = window.URL.createObjectURL(blob);
+
+    // Create a link element and simulate a click on it
+    const link = document.createElement('a');
+    link.href = url;
+    link.download = 'result.json';
+    document.body.appendChild(link);
+    link.click();
+
+    // Clean up the URL and link
+    window.URL.revokeObjectURL(url);
+    document.body.removeChild(link);
+  }
+
 
   return (
     <div className="App">
       <FileUploader handleChange={handleChange} name="file" multiply={false} types={fileTypes}/>
       <button className="Button" onClick={convertToCatalog} disabled={file == null}>String Catalog</button>
       <button className="Button" onClick={convertToZip} disabled={file == null}>Zip File</button>
+      <button className="Button" onClick={convertRemoteConfigLocalization} disabled={file == null}>Remote Config</button>
     </div>
   );
 }
